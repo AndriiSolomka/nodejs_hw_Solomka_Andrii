@@ -1,15 +1,16 @@
 "use strict";
-import colors from "colors/safe.js";
-import formatPrefix from "./formatPrefix.js";
 
-const createLogger = (prefix, isEnable) => {
+import colors from "colors/safe.js";
+import coloredPrefix from "./coloredPrefix.js";
+
+const createLogger = (prefix) => {
   return {
     log: (text) => {
-      console.log(formatPrefix(prefix, colors.green, isEnable), text);
+      console.log(coloredPrefix(prefix, colors.green), text);
     },
 
     warn: (text) => {
-      console.error(formatPrefix(prefix, colors.red, isEnable), text);
+      console.error(coloredPrefix(prefix, colors.red), text);
     },
   };
 };
