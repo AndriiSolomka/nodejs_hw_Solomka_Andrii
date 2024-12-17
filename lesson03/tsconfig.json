@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    // Целевая версия JavaScript
+    "module": "CommonJS",
+    // Используемый модульный стандарт
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    // Подключаем стандартные библиотеки
+    "allowJs": true,
+    // Позволяет использовать JavaScript
+    "jsx": "react",
+    // Для поддержки TSX
+    "esModuleInterop": true,
+    // Упрощает импорт модулей CommonJS
+    "strict": true,
+    // Включает строгую проверку типов
+    "moduleResolution": "node",
+    // Резолвинг модулей, как в Node.js
+    "outDir": "./dist",
+    // Каталог для скомпилированных файлов
+    "rootDir": "./src",
+    // Каталог исходных файлов
+    "resolveJsonModule": true,
+    // Для импорта JSON
+    "skipLibCheck": true
+    // Пропуск проверки типов в `node_modules`
+  },
+  "include": [
+    "src/**/*"
+  ],
+  // Какие файлы включать
+  "exclude": [
+    "node_modules"
+  ]
+  // Какие файлы исключать
+}
