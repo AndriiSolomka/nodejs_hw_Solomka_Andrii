@@ -7,6 +7,8 @@ import httpLogger from "./middleware/httpLogger";
 import logger from "./utils/loger";
 import { databaseService } from "./services/DatabaseService";
 import userRouter from "./routes/userRouter";
+import postRouter from "./routes/postRouter";
+import userPostsRouter from "./routes/userPostsRouter";
 
 const { log, warn, error } = logger("app");
 const app = express();
@@ -19,7 +21,11 @@ app.use(express.json());
 // Custom Middleware
 app.use(httpLogger);
 
-app.use("/api/v1", userRouter);
+//Routers
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/users", userPostsRouter);
+
 // Global error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   error("Error:", err.message);

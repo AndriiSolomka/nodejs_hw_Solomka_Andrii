@@ -3,7 +3,7 @@ import { userService } from "../services/UserService";
 
 const userRouter = Router();
 
-userRouter.post("/users", async (req: Request, res: Response) => {
+userRouter.post("/", async (req: Request, res: Response) => {
   try {
     const { name, email, age } = req.body;
     const user = await userService.createUser({ name, email, age });
@@ -13,7 +13,7 @@ userRouter.post("/users", async (req: Request, res: Response) => {
   }
 });
 
-userRouter.get("/users", async (req: Request, res: Response) => {
+userRouter.get("/", async (req: Request, res: Response) => {
   try {
     const users = await userService.getAllUsers(req.query);
     res.json(users);
@@ -22,7 +22,7 @@ userRouter.get("/users", async (req: Request, res: Response) => {
   }
 });
 
-userRouter.get("/users/:id", async (req: Request, res: Response) => {
+userRouter.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -33,7 +33,7 @@ userRouter.get("/users/:id", async (req: Request, res: Response) => {
   }
 });
 
-userRouter.put("/users/:id", async (req: Request, res: Response) => {
+userRouter.put("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { name, email, age } = req.body;
@@ -44,7 +44,7 @@ userRouter.put("/users/:id", async (req: Request, res: Response) => {
     res.status(500).json({ error: err.message });
   }
 });
-userRouter.delete("/users/:id", async (req: Request, res: Response) => {
+userRouter.delete("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const message = await userService.deleteUser(id);

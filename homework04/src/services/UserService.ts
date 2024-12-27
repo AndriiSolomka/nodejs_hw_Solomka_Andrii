@@ -1,6 +1,7 @@
 import { Db, ObjectId, WithId } from "mongodb";
 import { db } from "./DatabaseService";
 import collections from "../dbCollectionsNames/dbCollectionsName";
+import { IUser } from "../interfaces/userInterface";
 
 const { users } = collections;
 
@@ -12,7 +13,7 @@ class UserService {
     this.db = db;
   }
 
-  async createUser(data: { name: string; email: string; age: number }) {
+  async createUser(data: IUser) {
     const result = await this.db.collection(users).insertOne(data);
     return { _id: result.insertedId, ...data };
   }
@@ -29,12 +30,9 @@ class UserService {
     return result;
   }
 
-  async updateUser(
-    id: string,
-    data: { name?: string; email?: string; age?: number },
-  ) {
+  async updateUser(id: string, data: Partial<IUser>) {
     const result = await this.db
-      .collection("users")
+      .collection(users)
       .findOneAndUpdate(
         { _id: new ObjectId(id) },
         { $set: data },
