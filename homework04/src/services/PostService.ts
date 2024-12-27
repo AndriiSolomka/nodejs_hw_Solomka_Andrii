@@ -52,32 +52,6 @@ class PostService {
       .deleteOne({ _id: new ObjectId(id) });
     return result.deletedCount > 0;
   }
-
-  async deleteUserPost(user_id: string) {
-    const result = await this.db
-      .collection(posts)
-      .deleteOne({ authorId: user_id });
-    return result.deletedCount > 0;
-  }
-
-  async updateUserPosts(user_id: string, data: Partial<Post>) {
-    const result = await this.db
-      .collection(posts)
-      .findOneAndUpdate(
-        { authorId: new ObjectId(user_id) },
-        { $set: data },
-        { returnDocument: "after" },
-      );
-    return result;
-  }
-
-  async getUserPosts(user_id: string) {
-    const result = await this.db
-      .collection(posts)
-      .find({ authorId: user_id })
-      .toArray();
-    return result;
-  }
 }
 
 export const postService = new PostService(db);
