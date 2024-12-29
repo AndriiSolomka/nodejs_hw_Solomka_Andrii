@@ -1,6 +1,6 @@
 "use strict";
 import { Request, Response } from "express";
-import { postService } from "../src/services/PostService";
+import { postService } from "../services/PostService";
 
 class PostController {
   async create(req: Request, res: Response) {

@@ -1,6 +1,6 @@
 "use strict";
 import { Request, Response } from "express";
-import { userService } from "../src/services/UserService";
+import { userService } from "../services/UserService";
 
 class UserController {
   async create(req: Request, res: Response) {

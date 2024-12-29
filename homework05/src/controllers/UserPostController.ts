@@ -1,8 +1,8 @@
 "use strict";
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";
-import { postService } from "../src/services/PostService";
-import { userPostsService } from "../src/services/UserPostsService";
+import { postService } from "../services/PostService";
+import { userPostsService } from "../services/UserPostsService";
 
 class UserPostController {
   async createPost(req: Request, res: Response) {
