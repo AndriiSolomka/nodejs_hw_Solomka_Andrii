@@ -5,9 +5,9 @@ const { users } = collections;
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  name: String,
-  email: String,
-  age: Number,
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  age: { type: String, required: true },
 });
 
 export const User = mongoose.model(users, UserSchema);

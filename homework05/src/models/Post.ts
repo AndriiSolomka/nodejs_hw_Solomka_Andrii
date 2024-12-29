@@ -6,12 +6,15 @@ import collections from "../dbCollectionsNames/dbCollectionsName";
 const { posts } = collections;
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema({
-  authorId: Object,
-  title: { typeof: String, required: true },
-  content: { typeof: String, required: true },
-  status: { typeof: String, required: true },
-  createdAt: { typeof: Date, required: true },
-  updatedAt: { typeof: Date, required: true },
-});
+const PostSchema = new Schema(
+  {
+    authorId: { type: ObjectId, required: true },
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    status: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  },
+);
 export const Post = mongoose.model(posts, PostSchema);
