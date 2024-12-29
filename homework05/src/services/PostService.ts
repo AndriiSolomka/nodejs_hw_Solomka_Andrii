@@ -1,57 +1,19 @@
 import { Db, ObjectId, WithId } from "mongodb";
-import { db } from "./DatabaseService";
 import collections from "../dbCollectionsNames/dbCollectionsName";
 import { Post } from "../interfaces/postInterface";
 
 const { posts } = collections;
 
 class PostService {
-  async;
-  private db: Db;
+  async createPost(data: Post) {}
 
-  constructor(db: Db) {
-    this.db = db;
-  }
+  async getAllPosts(filters: Record<string, any> = {}) {}
 
-  async createPost(data: Post) {
-    const result = await this.db.collection(posts).insertOne({
-      ...data,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+  async getOnePost(id: string) {}
 
-    return { _id: result.insertedId, ...data };
-  }
+  async updatePost(id: string, data: Partial<Post>) {}
 
-  async getAllPosts(filters: Record<string, any> = {}) {
-    const result = await this.db.collection(posts).find(filters).toArray();
-    return result;
-  }
-
-  async getOnePost(id: string) {
-    const result = await this.db
-      .collection(posts)
-      .findOne({ _id: new ObjectId(id) });
-    return result;
-  }
-
-  async updatePost(id: string, data: Partial<Post>) {
-    const result = await this.db
-      .collection(posts)
-      .findOneAndUpdate(
-        { _id: new ObjectId(id) },
-        { $set: data },
-        { returnDocument: "after" },
-      );
-    return result?.value;
-  }
-
-  async deletePost(id: string) {
-    const result = await this.db
-      .collection(posts)
-      .deleteOne({ _id: new ObjectId(id) });
-    return result.deletedCount > 0;
-  }
+  async deletePost(id: string) {}
 }
 
-export const postService = new PostService(db);
+export const postService = new PostService();

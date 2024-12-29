@@ -1,52 +1,25 @@
-import { Db, ObjectId, WithId } from "mongodb";
-import { db } from "./DatabaseService";
-import collections from "../dbCollectionsNames/dbCollectionsName";
+import { User } from "../models/User";
 import { IUser } from "../interfaces/userInterface";
 
-const { users } = collections;
-
 class UserService {
-  async;
-  private db: Db;
-
-  constructor(db: Db) {
-    this.db = db;
-  }
-
   async createUser(data: IUser) {
-    const result = await this.db.collection(users).insertOne(data);
-    return { _id: result.insertedId, ...data };
+    const user = new User(data);
+    return await user.save();
   }
 
   async getAllUsers(filters: Record<string, any> = {}) {
-    const result = await this.db.collection(users).find(filters).toArray();
-    return result;
+    return await User.find(filters);
   }
 
   async getOneUser(id: string) {
-    const result = await this.db
-      .collection(users)
-      .findOne({ _id: new ObjectId(id) });
-    return result;
+    return await User.findById(id);
   }
 
-  async updateUser(id: string, data: Partial<IUser>) {
-    const result = await this.db
-      .collection(users)
-      .findOneAndUpdate(
-        { _id: new ObjectId(id) },
-        { $set: data },
-        { returnDocument: "after" },
-      );
-    return result?.value;
-  }
+  async updateUser(id: string, data: Partial<IUser>) {}
 
   async deleteUser(id: string) {
-    const result = await this.db
-      .collection(users)
-      .deleteOne({ _id: new ObjectId(id) });
-    return result.deletedCount > 0;
+    return User.deleteOne({ _id: id });
   }
 }
 
-export const userService = new UserService(db);
+export const userService = new UserService();
