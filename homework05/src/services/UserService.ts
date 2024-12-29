@@ -4,7 +4,8 @@ import { IUser } from "../interfaces/userInterface";
 class UserService {
   async createUser(data: IUser) {
     const user = new User(data);
-    return await user.save();
+    await user.save();
+    return user.id;
   }
 
   async getAllUsers(filters: Record<string, any> = {}) {

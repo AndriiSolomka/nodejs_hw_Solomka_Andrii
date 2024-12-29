@@ -1,6 +1,7 @@
 "use strict";
 import { Request, Response } from "express";
 import { postService } from "../services/PostService";
+import { ObjectId } from "mongodb";
 
 class PostController {
   async create(req: Request, res: Response) {
@@ -9,7 +10,7 @@ class PostController {
         req.body;
 
       const post = await postService.createPost({
-        authorId,
+        authorId: new ObjectId(authorId),
         title,
         content,
         status,

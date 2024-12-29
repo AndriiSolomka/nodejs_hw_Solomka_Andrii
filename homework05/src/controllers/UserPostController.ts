@@ -56,7 +56,7 @@ class UserPostController {
   async deletePost(req: Request, res: Response) {
     try {
       const { user_id } = req.params;
-      const post = await userPostsService.deleteUserPost(user_id);
+      const post = await userPostsService.deleteUserPosts(user_id);
       res.json(post);
     } catch (err) {
       res.status(500).json({ error: err.message });
