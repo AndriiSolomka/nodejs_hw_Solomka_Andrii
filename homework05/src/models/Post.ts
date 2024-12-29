@@ -8,10 +8,10 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   authorId: Object,
-  title: String,
-  content: String,
-  status: String,
-  createdAt: Date,
-  updatedAt: Date,
+  title: { typeof: String, required: true },
+  content: { typeof: String, required: true },
+  status: { typeof: String, required: true },
+  createdAt: { typeof: Date, required: true },
+  updatedAt: { typeof: Date, required: true },
 });
 export const Post = mongoose.model(posts, PostSchema);

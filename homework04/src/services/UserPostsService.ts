@@ -6,7 +6,6 @@ import { Post } from "../interfaces/postInterface";
 const { posts } = collections;
 
 class UserPostsService {
-  async;
   private db: Db;
 
   constructor(db: Db) {

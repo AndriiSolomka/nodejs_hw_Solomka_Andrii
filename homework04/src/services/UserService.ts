@@ -6,7 +6,6 @@ import { IUser } from "../interfaces/userInterface";
 const { users } = collections;
 
 class UserService {
-  async;
   private db: Db;
 
   constructor(db: Db) {

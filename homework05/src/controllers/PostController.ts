@@ -2,6 +2,9 @@
 import { Request, Response } from "express";
 import { postService } from "../services/PostService";
 import { ObjectId } from "mongodb";
+import logger from "../utils/loger";
+
+const { error } = logger("PostController");
 
 class PostController {
   async create(req: Request, res: Response) {
@@ -19,6 +22,7 @@ class PostController {
       });
       res.status(200).json(post);
     } catch (err) {
+      error("Create Post Error", err.message);
       res.status(500).json({ error: err.message });
     }
   }
@@ -28,6 +32,7 @@ class PostController {
       const posts = await postService.getAllPosts(req.query);
       res.json(posts);
     } catch (err) {
+      error("Get AllPosts Error", err.message);
       res.status(500).json({ error: err.message });
     }
   }
@@ -39,6 +44,7 @@ class PostController {
       const user = await postService.getOnePost(id);
       res.json(user);
     } catch (err) {
+      error("Get OnePost Error", err.message);
       res.status(500).json({ error: err.message });
     }
   }
@@ -58,6 +64,7 @@ class PostController {
       });
       res.json(user);
     } catch (err) {
+      error("Update Post Error", err.message);
       res.status(500).json({ error: err.message });
     }
   }
@@ -68,6 +75,7 @@ class PostController {
       const message = await postService.deletePost(id);
       res.json(message);
     } catch (err) {
+      error("Delete Post Error", err.message);
       res.status(500).json({ error: err.message });
     }
   }
