@@ -21,6 +21,7 @@ app.use(express.json());
 // Custom Middleware
 app.use(httpLogger);
 
+console.log(process.env.DATABASE_URL);
 //Routers
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/posts", postRouter);
