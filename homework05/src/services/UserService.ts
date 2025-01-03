@@ -16,7 +16,9 @@ class UserService {
     return await User.findById(id);
   }
 
-  async updateUser(id: string, data: Partial<IUser>) {}
+  async updateUser(id: string, data: Partial<IUser>) {
+    return User.findByIdAndUpdate(id, { $set: data });
+  }
 
   async deleteUser(id: string) {
     return User.deleteOne({ _id: id });
