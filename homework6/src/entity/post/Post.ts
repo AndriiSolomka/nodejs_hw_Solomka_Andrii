@@ -2,21 +2,17 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
-  Relation,
-  Index,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
+import { User } from "../user/User";
 
 @Entity("posts")
 export class Post {
   @PrimaryGeneratedColumn("increment")
   post_id: number;
-
-  @Index()
-  @Column("int")
-  author_id: number;
 
   @Column("text")
   title: string;
@@ -28,8 +24,12 @@ export class Post {
   status: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdat: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedat: Date;
+
+  @ManyToOne(() => User, (user) => user.posts)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 }

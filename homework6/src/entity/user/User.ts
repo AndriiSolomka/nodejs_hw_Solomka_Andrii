@@ -3,12 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  Relation,
   Index,
 } from "typeorm";
+import { Post } from "../post/Post";
 
-Entity("users");
-
+@Entity("users")
 export class User {
   @PrimaryGeneratedColumn("increment")
   user_id: number;
@@ -17,9 +16,12 @@ export class User {
   @Column("text")
   name: string;
 
-  @Column("text")
+  @Column("text", { nullable: false, default: "Unnamed" })
   email: string;
 
   @Column("integer")
   age: number;
+
+  @OneToMany(() => Post, (post) => post.user, { cascade: true })
+  posts: Post[];
 }
